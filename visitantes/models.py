@@ -40,10 +40,10 @@ class Visitante(models.Model):
         if self.cpf:
             cpf = str(self.cpf)
 
-            cpf_parte_um = cpf[0:2]
-            cpf_parte_dois = cpf[3:5]
-            cpf_parte_tres = cpf[6:8]
-            cpf_parte_quartro = cpf[9:10]
+            cpf_parte_um = cpf[0:3]
+            cpf_parte_dois = cpf[3:6]
+            cpf_parte_tres = cpf[6:9]
+            cpf_parte_quartro = cpf[9:11]
 
             cpf_formatado = f'{cpf_parte_um}.{cpf_parte_dois}.{cpf_parte_tres}-{cpf_parte_quartro}'
             return cpf_formatado
