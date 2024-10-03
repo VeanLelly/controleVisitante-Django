@@ -1,6 +1,6 @@
 
 {% extends 'base.html'%}
-
+{%load widget_tweaks%}
 {%block conteudo%}
                     <div class="container">
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -15,12 +15,24 @@
                     <p class="mb-5 ml-1">
                         <small>bla bla</small>
                     </p>
+                    {% if form.errors%}
+                        {% for field in form%}
+                            {% if field.errors%}
+                                {% for erro in field.errors%}
+                                <div class="alert alert-warning">{{erro}}</div>
+                                {% endfor%}
+                                {% endif%}
+                                {% endfor%}
+                                {% endif%}
+
                                 <form method="post" enctype="multipart/form-data">
                                     <div class="form-row">
+
                                      {% csrf_token%}
                                      {%for field in form%}
                                      <div class="form-group col-md-12">
-                                        <label>{{field.label}}</label>
+                                        <label>{{field.label}} {% if field.field.required %}*{% endif %}</label>
+                                        {% render_field field placeholder=field.label class='form-control'%}
                                      </div>
                                      {% endfor %}
                                     </div>

@@ -7,7 +7,7 @@ class VisitanteForm(forms.ModelForm):
     class Meta:
         model = Visitante
         fields = [
-            'nome_completo', 'cpf', 'data_Nascimento', 'numero_casa', 'placa_veiculo',
+            'nome_completo', 'cpf','telefone', 'data_Nascimento', 'numero_casa', 'placa_veiculo',
         ]
         error_menssages = {
             'nome_completo':{'required': 'O nome completo do visitante é obrigatório para o registro.'
