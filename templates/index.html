@@ -107,7 +107,7 @@
                             <td>{{visitante.horario_autorizacao}}</td>
                             <td>{{visitante.morador_responsavel}}</td>
                             <td>
-                                <a href="{%url 'informacoes_visitante'%}">
+                                <a href="{%url 'informacoes_visitante' pk=visitante.id%}">
                                     Ver informações
                                 </a>
                                 {%endfor i in todos_visitantes%}
