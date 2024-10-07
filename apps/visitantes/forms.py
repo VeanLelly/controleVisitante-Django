@@ -17,15 +17,15 @@ class VisitanteForm(forms.ModelForm):
             'numero_casa':{'required': 'O número da casa a ser visitada é obrigatório para o registro'},
         }
 
-    class AutorizaVisitanteForm(forms.ModelForm):
-        class Meta:
-            model = Visitante
-            fields = [
-            'morador_responsavel'
-            ]
-            error_menssage ={
-                'morador_responsavel':{
-                    'required': 'Por favor, informe o nome do morador que receberá sua visita'
-                }
+class AutorizaVisitanteForm(forms.ModelForm):
+    class Meta:
+        model = Visitante
+        fields = [
+        'morador_responsavel'
+        ]
+        error_menssage ={
+            'morador_responsavel':{
+                'required': 'Por favor, informe o nome do morador que receberá sua visita'
             }
+        }
 

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +28,11 @@ SECRET_KEY = 'django-insecure-3h29k0p)r_(lamhr9ek(r&gpaec+7506duym+=+v=%&00ei^pm
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+sys.path.append(
+    os.path.join(BASE_DIR, 'apps')
+    )
+
 
 
 # Application definition
@@ -132,5 +138,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
+
+LOGOUT_URL = 'logout'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

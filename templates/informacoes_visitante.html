@@ -6,19 +6,40 @@
 <div class="container">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">{{ nome_pagina }}</h1>
+        <div>
+            {% if visitante.status == "ARGUARDANDO" %}
+            <a href='#' class="btn btn-success btn-icon-split btn-sm" data-toggle="modal" data-target="#modal1">
+                <span> Autorizar Entrada</span>
+                <span clas="icon text-white-50">
+                    <i class="fas fa-user-check"></i>
+                </span>
+            </a>
+            {% endif %}
+
+            {% if visitante.status == "EM_VISITA"%}
+            <a href='#' class="btn btn-warning btn-icon-split btn-sm" data-toggle="modal" data-target="#modal2">
+                <span>Finalizar autorizacão</span>
+                <span clas="icon text-white-50">
+                    <i class="fas fa-user-check"></i>
+                </span>
+            </a>
+            {% endif %}
+        </div>
     </div>
-    
-    <div class="card shadow mb-4">        
+
+
+    <div class="card shadow mb-4">
         <div class="card-body">
             <h4 class="mb-3 text-primary">
                 Informações gerais
             </h4>
-        
+
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Horário de chegada</label>
-                        <input type="text" class="form-control" value='{{informacoes_visitante.horario_chegada}}' disabled>
+                        <input type="text" class="form-control" value='{{informacoes_visitante.horario_chegada}}'
+                            disabled>
                     </div>
 
                     <div class="form-group col-md-6">
@@ -30,25 +51,28 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Horário de autorização de entrada</label>
-                        <input type="text" class="form-control" value='{{informacoes_visitante.get_horario_autorizado}}' disabled>
+                        <input type="text" class="form-control" value='{{informacoes_visitante.get_horario_autorizado}}'
+                            disabled>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label>Entrada autorizada por</label>
-                        <input type="text" class="form-control" value='{{informacoes_visitante.registrado_por}}' disabled>
+                        <input type="text" class="form-control" value='{{informacoes_visitante.registrado_por}}'
+                            disabled>
                     </div>
 
                     <div class="form-group col-md-4">
                         <label>Horário de saída</label>
-                        <input type="text" class="form-control" value='{{informacoes_visitante.get_horario_saida}}' disabled>
+                        <input type="text" class="form-control" value='{{informacoes_visitante.get_horario_saida}}'
+                            disabled>
                     </div>
                 </div>
             </form>
-        
+
             <h4 class="mb-3 mt-4 text-primary">
                 Informações pessoais
             </h4>
-            
+
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -65,27 +89,88 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Data de nascimento</label>
-                        <input type="text" class="form-control" value='{{informacoes_visitante.data_Nascimento}}' disabled>
+                        <input type="text" class="form-control" value='{{informacoes_visitante.data_Nascimento}}'
+                            disabled>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label>Placa do veículo</label>
-                        <input type="text" class="form-control" value='{{informacoes_visitante.get_placa_veiculo}}' disabled>
+                        <input type="text" class="form-control" value='{{informacoes_visitante.get_placa_veiculo}}'
+                            disabled>
                     </div>
                 </div>
             </form>
-                    
+
             <p class="mr-2 mt-3 mb-4 text-right">
                 <small>
-                    {{informacoes_visitante.get_horario_autorizado}} e autorizado por: {{informacoes_visitante.get_registrado_por}}
+                    {{informacoes_visitante.horario_chegada}} e autorizado por: {{informacoes_visitante.registrado_por}}
                 </small>
             </p>
-        
+
             <div class="mr-1 text-right">
                 <a href="#" class="btn btn-secondary text-white" type="button">
                     <span class="text">Voltar</span>
                 </a>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Autorizar entrada de visitante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_morador_responsavel" class="col-form-label">Nome do morador responsável por
+                            autorizar entrada de visitante:</label>
+                        {% render_field form.morador_responsavel placeholder='Nome do morador responsável por autorizar
+                        entrada de visitante:' class='form-control'%}
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Autorizar entrada</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Finalizar visita</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="mb-3">Realmente deseja encerrar a visita?</h5>
+                <form method="post" action="{% url 'finalizar-visita' pk=visitante.id%}">
+                    {% csrf_token %}
+                    <input hidden>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Finalizar entrada</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
