@@ -33,7 +33,7 @@ def registrar_visitante (request):
 
 
 
-def informacoes_visitante (request,pk):
+def informacoes_visitante (request, pk):
     visitante = get_object_or_404(Visitante, pk=pk)
 
     form = AutorizaVisitanteForm(request.POST, instance= visitante)
@@ -50,7 +50,7 @@ def informacoes_visitante (request,pk):
 
     context = {
         'nome_pagina': 'Informações dos Visitantes',
-        'informacoes_visitante': visitante,
+        'visitante': visitante,
         'form':form,
     }
 
@@ -60,7 +60,7 @@ def informacoes_visitante (request,pk):
 def finalizar_visita(request, pk):
 
     if request.method == 'POST':
-        visitante = get_object_or_404(Visitante,pk=pk)
+        visitante = get_object_or_404(Visitante, pk=pk)
         visitante.status = 'FINALIZADO'
         visitante.horario_saida = timezone.now()
         visitante.save()
