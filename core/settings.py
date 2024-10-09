@@ -48,9 +48,20 @@ INSTALLED_APPS = [
 INSTALLED_APPS +=[
     'widget_tweaks',
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
-INSTALLED_APPS += ['usuarios', 'porteiros', 'visitantes' ]
+INSTALLED_APPS += ['usuarios', 'porteiros', 'visitantes', 'moradores', 'apartamentos', ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASS':[
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
