@@ -1,0 +1,49 @@
+{% extends 'base.html'%}
+
+{% block conteudo%} 
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{nome_pagina}}</h1>
+
+        <a href="{% url 'lista_moradores'%}" class="btn btn-primary btn-icon-split btn-sm">
+            <span class="text">....</span>
+            <span class="icon text-whit-50">
+                <i class="fas fa-user-plus"></i>
+            </span>
+        </a>
+    </div>
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-sm-flex align-items-center justify-content-between mb-4">
+        <h6 class="m-0 font-weight-bold text-primary">Lista do Moradores</h6>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <th>Nome completo</th>
+                    <th>Contato</th>
+                    <th>Mais informações</th>
+                </thead>
+
+                <tbody>
+                    {% for moradores in Moradores%}
+                    <tr>  
+                        <td>{{morador.nome_completo}}</td>
+                        <td>{{morador.contato}}</td>
+                        <td>
+                            <a href="{%url 'lista_moradores'%}">
+                                Ver informações
+                            </a>
+                            {%endfor i in moradores%}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock conteudo%} 

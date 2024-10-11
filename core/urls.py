@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 from dashboard.views import index
 from visitantes.views import registrar_visitante, finalizar_visita, informacoes_visitante
+from moradores.views import lista_moradores
 from django.contrib.auth.views import LoginView, LogoutView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -34,4 +35,6 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('lista_moradores/', lista_moradores, name='lista_moradores'),
 ]
